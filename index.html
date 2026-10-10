@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Сергей Есенин — комикс, карточки, игра</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,900;1,500&family=Inter:wght@400;600&display=swap">
+<style>
+:root{--bg:#f6efdc;--ink:#1d2433;--mut:#5f6577;--card:#fffbef;--line:#d8cba8;--rye:#d9a93a;--sky:#2f4a7a;--acc:#b8402f;--ok:#2e7d4f;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#12161f;--ink:#f1ead8;--mut:#a3a9b8;--card:#1b2130;--line:#33405a;--rye:#e5b94c;--sky:#8fb0ea;--acc:#e5705d;--ok:#5cc08a}}
+:root[data-theme="dark"]{--bg:#12161f;--ink:#f1ead8;--mut:#a3a9b8;--card:#1b2130;--line:#33405a;--rye:#e5b94c;--sky:#8fb0ea;--acc:#e5705d;--ok:#5cc08a}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.55 Inter,system-ui,sans-serif}
+h1,h2,h3,.serif{font-family:'Playfair Display',Georgia,serif}
+.wrap{max-width:1020px;margin:0 auto;padding:0 20px}
+.hero{padding:70px 0 40px;text-align:center;position:relative;overflow:hidden;background:radial-gradient(circle at 50% 120%,color-mix(in srgb,var(--rye) 35%,transparent),transparent 60%)}
+.kick{letter-spacing:.25em;text-transform:uppercase;font-size:12px;color:var(--acc);font-weight:600}
+h1{font-size:clamp(46px,10vw,104px);line-height:1;margin:14px 0 8px;font-weight:900}
+h1 em{color:var(--acc)}
+.yrs{font:italic 500 clamp(20px,4vw,28px) 'Playfair Display',Georgia,serif;color:var(--sky);margin-bottom:18px}
+.lead{max-width:580px;margin:0 auto 26px;color:var(--mut)}
+.btn{display:inline-block;background:var(--ink);color:var(--bg);border:0;border-radius:99px;padding:13px 28px;font:600 16px Inter,sans-serif;cursor:pointer;text-decoration:none;transition:transform .15s}
+.btn:hover{transform:translateY(-2px)}.btn.alt{background:transparent;color:var(--ink);border:1.5px solid var(--ink);margin-left:8px}
+section{padding:46px 0}
+h2{font-size:clamp(28px,5vw,44px);margin:0 0 6px}
+.sub{color:var(--mut);margin:0 0 26px}
+.comic{display:grid;grid-template-columns:repeat(6,1fr);gap:12px}
+.p{grid-column:span 2;background:var(--card);border:3px solid var(--ink);border-radius:6px;position:relative;min-height:290px;display:flex;flex-direction:column;justify-content:space-between;overflow:hidden;box-shadow:5px 5px 0 var(--ink)}
+.p.w{grid-column:span 3}.p.x{grid-column:span 6;min-height:220px}
+.p:before{content:"";position:absolute;inset:0;background:radial-gradient(var(--c) 1.4px,transparent 1.6px) 0 0/10px 10px;opacity:.28}
+.p .art{font-size:76px;text-align:center;padding:26px 0 0;position:relative;filter:drop-shadow(3px 3px 0 rgba(0,0,0,.15))}
+.p .yr{position:absolute;top:8px;left:8px;background:var(--ink);color:var(--bg);font:900 17px 'Playfair Display',Georgia,serif;padding:2px 10px;z-index:1}
+.bal{position:relative;margin:8px 14px 0;background:#fff;color:#1d2433;border:2.5px solid #1d2433;border-radius:18px;padding:8px 12px;font-size:14px;line-height:1.35;align-self:flex-start}
+.bal:after{content:"";position:absolute;bottom:-11px;left:30px;border:9px solid transparent;border-top-color:#1d2433;border-bottom:0}
+.cap{position:relative;background:var(--rye);color:#1d2433;border-top:3px solid var(--ink);padding:10px 12px;font-size:14px;line-height:1.4;font-weight:600}
+.game{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:clamp(20px,4vw,40px);box-shadow:0 12px 40px rgba(0,0,0,.08);min-height:360px}
+.top{display:flex;justify-content:space-between;font-size:14px;color:var(--mut);margin-bottom:12px;flex-wrap:wrap;gap:8px}
+.bar{height:6px;background:var(--line);border-radius:9px;overflow:hidden;margin-bottom:22px}.bar i{display:block;height:100%;background:var(--acc);transition:width .4s}
+.q{font-size:clamp(20px,3.4vw,28px);line-height:1.3;margin:0 0 20px;font-weight:500}
+.opts{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}
+.opt{text-align:left;background:transparent;color:var(--ink);border:1.5px solid var(--line);border-radius:14px;padding:14px 16px;font:600 16px Inter,sans-serif;cursor:pointer;transition:.15s}
+.opt:hover:not(:disabled){border-color:var(--ink);transform:translateY(-2px)}
+.opt.ok{border-color:var(--ok);background:color-mix(in srgb,var(--ok) 16%,transparent)}.opt.no{border-color:var(--acc);background:color-mix(in srgb,var(--acc) 14%,transparent)}
+.fb{margin-top:18px;padding:14px 16px;border-left:4px solid var(--rye);background:color-mix(in srgb,var(--rye) 12%,transparent);border-radius:0 12px 12px 0}
+.center{text-align:center;padding:30px 0}.big{font:900 clamp(64px,14vw,120px)/1 'Playfair Display',Georgia,serif;color:var(--acc)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:18px}
+.flip{perspective:1000px;height:220px;background:none;border:0;padding:0;cursor:pointer;color:inherit;font:inherit;text-align:left}
+.in{position:relative;width:100%;height:100%;transition:transform .6s;transform-style:preserve-3d}.flip.on .in{transform:rotateY(180deg)}
+.f,.b{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;border-radius:16px;padding:20px;display:flex;flex-direction:column;justify-content:center;border:1px solid var(--line)}
+.f{background:var(--card);font:500 19px/1.3 'Playfair Display',Georgia,serif;border-top:6px solid var(--rye)}
+.f small{font:600 11px Inter,sans-serif;letter-spacing:.12em;text-transform:uppercase;color:var(--mut);position:absolute;bottom:14px;left:20px}
+.b{background:var(--sky);color:#fff;transform:rotateY(180deg);font-size:15px;line-height:1.4}
+:root[data-theme="dark"] .b,:root:not([data-theme="light"]) .b{color:#10141c}
+.b b{font:900 24px 'Playfair Display',Georgia,serif;display:block;margin-bottom:6px}
+footer{padding:30px 0 56px;text-align:center;color:var(--mut);font-size:14px}
+@media(max-width:720px){.p,.p.w{grid-column:span 6;min-height:250px}}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<header class="hero"><div class="wrap">
+<div class="kick">Поэт Серебряного века</div>
+<h1>Сергей <em>Есенин</em></h1>
+<div class="yrs">1895 — 1925</div>
+<p class="lead">Жизнь поэта в комиксе, карточки с вопросами и викторина на проверку знаний.</p>
+<a class="btn" href="#comic">Читать комикс</a><a class="btn alt" href="#game">Играть</a>
+</div></header>
+
+<section id="comic"><div class="wrap">
+<h2>Комикс: путь поэта</h2>
+<p class="sub">Восемь кадров от рязанского села до Ленинграда.</p>
+<div class="comic" id="cm"></div>
+</div></section>
+
+<section id="game"><div class="wrap">
+<h2>Викторина</h2>
+<p class="sub">8 вопросов по биографии.</p>
+<div class="game" id="g" aria-live="polite"></div>
+</div></section>
+
+<section id="cards"><div class="wrap">
+<h2>Карточки с вопросами</h2>
+<p class="sub">Ответьте про себя, затем переверните карточку.</p>
+<div class="grid" id="grid"></div>
+</div></section>
+
+<footer><div class="wrap">Стихотворных строк на странице нет намеренно. Читайте Есенина в книгах и библиотеках.<br>Факты — по открытым биографическим источникам.</div></footer>
+
+<script>
+const C=[
+["1895","🌾","#d9a93a","","Родился 3 октября (21 сентября по ст. стилю) в селе Константиново Рязанской губернии, в крестьянской семье.",""],
+["1899–1904","🏡","#b8402f","Бабушка, расскажи ещё!","Первые годы он растёт в доме деда и бабушки по матери, Титовых. Там слышит сказки, песни и частушки.","w"],
+["1904–1909","🏫","#2f4a7a","","Учится в константиновском земском училище и оканчивает его с похвальным листом.","w"],
+["1912","🚂","#2f4a7a","Москва, держи меня!","Переезжает в Москву, работает в типографии Сытина помощником корректора. В 1913–1915 годах учится вольнослушателем в университете Шанявского.",""],
+["1915","🎩","#8a6a2c","Вы Блок? Я привёз стихи.","Приезжает в Петроград и знакомится с Блоком, Клюевым, Городецким. Становится заметным именем столичной литературы.",""],
+["1916","📖","#2e7d4f","","Выходит первая книга «Радуница». В январе поэта призывают в армию, он служит при военном госпитале под Петроградом.",""],
+["1918–1920","🎭","#b8402f","Образ — вот главное!","Возвращается в Москву и входит в круг имажинистов. Вечера проходят в литературном кафе «Стойло Пегаса».","w"],
+["1922–1923","🌍","#2f4a7a","Европа и Америка!","Женится на танцовщице Айседоре Дункан. Вместе они отправляются в поездку по Европе и США. В августе 1923 года он возвращается в Москву один.","w"],
+["1925","🕯️","#5f6577","","Пишет «Анну Снегину». 28 декабря 1925 года Есенина не стало в Ленинграде. Похоронен в Москве, на Ваганьковском кладбище.","x"]];
+const cm=document.getElementById('cm');
+C.forEach(c=>{const d=document.createElement('div');d.className='p '+c[5];d.style.setProperty('--c',c[2]);
+d.innerHTML=`<span class="yr">${c[0]}</span><div class="art">${c[1]}</div>${c[3]?`<div class="bal">${c[3]}</div>`:'<div></div>'}<div class="cap">${c[4]}</div>`;cm.appendChild(d)});
+const Q=[
+["Где родился Есенин?","Константиново",["Константиново","Спас-Клепики","Рязань","Москва"],"Село Константиново Рязанской губернии."],
+["У кого он жил в раннем детстве?","у деда и бабушки по матери",["у деда и бабушки по матери","у дяди в Москве","в монастыре","в интернате"],"Семья Титовых воспитывала его с 1899 по 1904 год."],
+["Где Есенин работал в Москве помощником корректора?","в типографии Сытина",["в типографии Сытина","в газете «Русские ведомости»","в библиотеке","на заводе"],"Это было после переезда в Москву в 1912 году."],
+["С кем из поэтов он познакомился в Петрограде в 1915 году?","Блок и Клюев",["Блок и Клюев","Маяковский и Хлебников","Гумилёв и Мандельштам","Бальмонт и Брюсов"],"Эти встречи помогли ему войти в столичную литературу."],
+["Как называется его первая книга?","«Радуница»",["«Радуница»","«Камень»","«Вечерний альбом»","«Персидские мотивы»"],"«Радуница» вышла в 1916 году."],
+["К какому литературному кругу Есенин примкнул в 1918–1920 годах?","имажинисты",["символисты","имажинисты","акмеисты","обэриуты"],"Имажинисты собирались в кафе «Стойло Пегаса»."],
+["Кто была его спутницей в поездке по Европе и США?","Айседора Дункан",["Айседора Дункан","Анна Павлова","Галина Бениславская","Зинаида Райх"],"Поездка продолжалась в 1922–1923 годах."],
+["Где похоронен Есенин?","Ваганьковское кладбище, Москва",["Ваганьковское кладбище, Москва","Новодевичье кладбище","Константиново","Ленинград"],"Он умер 28 декабря 1925 года в Ленинграде, похоронен в Москве."]];
+const g=document.getElementById('g');let i,s,st,done;
+const sh=a=>[...a].sort(()=>Math.random()-.5);
+function start(){i=0;s=0;st=0;g.innerHTML=`<div class="center"><div class="big">?</div><h3 style="font-size:28px;margin:8px 0">Что вы знаете о Есенине?</h3><button class="btn" id="go">Начать</button></div>`;document.getElementById('go').onclick=show}
+function show(){const q=Q[i];done=false;
+g.innerHTML=`<div class="top"><span>Вопрос ${i+1} из ${Q.length}</span><span>Очки: ${s} · серия: ${st}</span></div><div class="bar"><i style="width:${i/Q.length*100}%"></i></div><p class="q serif">${q[0]}</p><div class="opts"></div><div id="fb"></div>`;
+const o=g.querySelector('.opts');sh(q[2]).forEach(t=>{const b=document.createElement('button');b.className='opt';b.textContent=t;b.onclick=()=>pick(b,t);o.appendChild(b)})}
+function pick(b,t){if(done)return;done=true;const q=Q[i],ok=t===q[1];
+g.querySelectorAll('.opt').forEach(x=>{x.disabled=true;if(x.textContent===q[1])x.classList.add('ok')});
+if(ok){s++;st++}else{st=0;b.classList.add('no')}
+document.getElementById('fb').innerHTML=`<div class="fb"><b>${ok?'Верно!':'Не совсем.'}</b> ${q[3]}</div><p style="text-align:right;margin:14px 0 0"><button class="btn" id="nx">${i+1<Q.length?'Дальше':'Результат'}</button></p>`;
+document.getElementById('nx').onclick=()=>{i++;i<Q.length?show():end()}}
+function end(){const r=s>=7?'Знаток Есенина':s>=5?'Внимательный читатель':s>=3?'Хорошее начало':'Всё впереди';
+g.innerHTML=`<div class="center"><div class="big">${s}/${Q.length}</div><h3 style="font-size:30px;margin:10px 0 20px">${r}</h3><button class="btn" id="again">Ещё раз</button><a class="btn alt" href="#cards">К карточкам</a></div>`;document.getElementById('again').onclick=start}
+start();
+const gr=document.getElementById('grid');
+Q.forEach((q,n)=>{const d=document.createElement('button');d.className='flip';d.setAttribute('aria-label','Карточка '+(n+1)+': перевернуть');
+d.innerHTML=`<div class="in"><div class="f">${q[0]}<small>Нажмите, чтобы узнать ответ</small></div><div class="b"><b>${q[1]}</b>${q[3]}</div></div>`;
+d.onclick=()=>d.classList.toggle('on');gr.appendChild(d)});
+</script>
+</body>
+</html>
